@@ -1,7 +1,8 @@
 import React from 'react';
 import Form from "./components/Form";
 import List from "./components/List";
-import './App.css';
+import './App.scss';
+import icon from './icon.png';
 
 class App extends React.Component {
   constructor(props){
@@ -30,7 +31,10 @@ class App extends React.Component {
   render(){
     return(
       <div>
-        <h2>MemoApp</h2>
+        <div class="header">
+          <img src={icon} class="icon"/>
+          <h2>Keep</h2>
+        </div>
         <Form addMemo={this.addMemo} />
         <List memos={this.state.memos} deleteMemo={this.deleteMemo} />
       </div>

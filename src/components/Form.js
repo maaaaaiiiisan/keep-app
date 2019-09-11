@@ -1,18 +1,18 @@
 import React from "react";
+import './Form.scss';
 
 class Form extends React.Component {
     constructor(props){
         super(props);
-        this.state = { content:"content" };
+        this.state = { content:"メモを入力..." };
     }
 
     render(){
         return (
-            <div>      
-                <h2>Form</h2>
+            <div class="form">      
                 <form onSubmit={this.handleSubmit}>
-                <input value={this.state.content} onChange={this.handleChange} />
-                <input type="submit" value="Add Memo" /> 
+                <input class="input-box" value={this.state.content} onChange={this.handleChange} />
+                <input class="input-close"type="submit" value="閉じる" /> 
                 </form>
             </div>
         );

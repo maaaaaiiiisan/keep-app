@@ -1,3 +1,21 @@
+.icon {
+  width: 50px;
+  height: auto;
+  display: inline-block;
+}
+
+.header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  float: left;
+  width: 100%,
+}
+h2 {
+  display: inline-block;
+  text-align: center;
+}
+
 .App {
   text-align: center;
 }
