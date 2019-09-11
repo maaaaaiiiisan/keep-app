@@ -1,5 +1,4 @@
 import React from "react";
-import { render } from "react-dom";
 
 class List extends React.Component {
     constructor(props) {
@@ -7,8 +6,21 @@ class List extends React.Component {
       }
 
     render(){
-        return <h3>List</h3>;
-    }
+        const list = this.props.memos.map(memo =>{
+            return(
+                <li>
+                    #{memo.id} - {memo.content}{" "}
+                    <button onClick={() => this.props.deleteMemo(memo.id)}>delete</button>
+                </li>
+            );
+        }); 
+           return(
+               <div>
+                   <h2>List</h2>
+                   <ul>{list}</ul>
+                </div>
+           );
+        }
 }
 
 export default List;
