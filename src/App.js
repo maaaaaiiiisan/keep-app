@@ -3,6 +3,7 @@ import Form from "./components/Form";
 import List from "./components/List";
 import './App.scss';
 import icon from './icon.png';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 class App extends React.Component {
   constructor(props){
@@ -31,8 +32,8 @@ class App extends React.Component {
   render(){
     return(
       <div>
-        <div class="header">
-          <img src={icon} class="icon"/>
+        <div className="header">
+          <img src={icon} className="icon"/>
           <h2>Keep</h2>
         </div>
         <Form addMemo={this.addMemo} />

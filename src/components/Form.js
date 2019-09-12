@@ -9,10 +9,10 @@ class Form extends React.Component {
 
     render(){
         return (
-            <div class="form">      
+            <div className="form">      
                 <form onSubmit={this.handleSubmit}>
-                <input class="input-box" value={this.state.content} onChange={this.handleChange} />
-                <input class="input-close"type="submit" value="閉じる" /> 
+                <input className="input-box" value={this.state.content} onChange={this.handleChange} />
+                <input className="input-close"type="submit" value="閉じる" /> 
                 </form>
             </div>
         );

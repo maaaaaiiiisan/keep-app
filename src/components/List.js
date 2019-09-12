@@ -1,4 +1,5 @@
 import React from "react";
+import './List.scss';
 
 class List extends React.Component {
     constructor(props) {
@@ -8,15 +9,15 @@ class List extends React.Component {
     render(){
         const list = this.props.memos.map(memo =>{
             return(
-                <li>
-                    #{memo.id} - {memo.content}{" "}
+                <li className="list">
+                    {memo.content}{" "}
                     <button onClick={() => this.props.deleteMemo(memo.id)}>delete</button>
                 </li>
+                
             );
         }); 
            return(
-               <div>
-                   <h2>List</h2>
+               <div className="list">
                    <ul>{list}</ul>
                 </div>
            );

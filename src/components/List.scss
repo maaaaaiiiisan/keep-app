@@ -1,0 +1,18 @@
+li {
+    border-radius: 10px;
+    border: solid 3px #e0e0e0;
+    height: 5rem;
+}
+
+ul {
+    list-style: none;
+    width: 70%;
+    padding-left: 0;
+}
+
+.list {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}

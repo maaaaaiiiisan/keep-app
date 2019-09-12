@@ -1,19 +1,26 @@
 .form {
-    margin-left: 3rem;
     display: flex;
     justify-content: center;
     align-items: center;
-    float: left;
     width: 100%;
-}
-form {
-    border-radius: 10px;
-    border: solid 3px #e0e0e0
-}
-.input-box {
-    height: 5rem;
-    border: none;
-}
-.input-close {
-    border-radius: 20px;
+    
+    form {
+        border-radius: 10px;
+        border: solid 3px #e0e0e0;
+        width: 70%;
+        margin: 1rem;
+    }
+
+    .input-box {
+        height: 5rem;
+        border: none;
+        display: flex;
+        width: 100%;
+    }
+    
+    .input-close {
+        border-radius: 20px;
+        float: right;
+        border: none;
+    }
 }
