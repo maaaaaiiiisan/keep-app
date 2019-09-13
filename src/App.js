@@ -35,6 +35,7 @@ class App extends React.Component {
         <div className="header">
           <img src={icon} className="icon"/>
           <h2>Keep</h2>
+          <i class="material-icons">menu</i>
         </div>
         <Form addMemo={this.addMemo} />
         <List memos={this.state.memos} deleteMemo={this.deleteMemo} />
