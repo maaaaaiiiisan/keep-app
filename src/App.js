@@ -33,9 +33,10 @@ class App extends React.Component {
     return(
       <div>
         <div className="header">
+          <i class="material-icons">menu</i>
           <img src={icon} className="icon"/>
           <h2>Keep</h2>
-          <i class="material-icons">menu</i>
+          
         </div>
         <Form addMemo={this.addMemo} />
         <List memos={this.state.memos} deleteMemo={this.deleteMemo} />

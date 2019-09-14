@@ -1,6 +1,6 @@
 .icon {
-  width: 50px;
-  height: auto;
+  width: 40px;
+  height: 40px;
   display: inline-block;
 }
 
@@ -8,11 +8,21 @@
   display: flex;
   align-items: center;
   width: 100%;
-  margin: 1rem;
+  margin: 1rem 0;
+  border-bottom: solid  rgba(0,0,0,.1);
+  border-width: 1px 1px 1px 6px;
 }
 h2 {
   display: inline-block;
   text-align: center;
+  color: #5f6368;
+  padding-left: 4px;
+  font-size: 22px !important;
+  line-height: 24px;
+}
+i {
+  margin: 0 4px;
+  padding: 12px;
 }
 
 .App {

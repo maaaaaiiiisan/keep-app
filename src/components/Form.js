@@ -11,9 +11,12 @@ class Form extends React.Component {
         return (
             <div className="form">      
                 <form onSubmit={this.handleSubmit}>
-                <input className="input-box" value={this.state.content} onChange={this.handleChange} />
-                <input className="input-close"type="submit" value="閉じる" /> 
+                <input className="input-box" placeholder="メモを入力..." onChange={this.handleChange} />
                 </form>
+                <div>
+                <i class="material-icons">color_lens</i>
+                <input className="input-close"type="submit" value="閉じる" /> 
+                </div>
             </div>
         );
     }
