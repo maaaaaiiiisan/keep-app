@@ -2,22 +2,22 @@ import React from "react";
 import './List.scss';
 
 class List extends React.Component {
-    constructor(props) {
-        super(props);
-      }
-
     render(){
         const list = this.props.memos.map(memo =>{
             return(
                 <li className="list">
                     {memo.content}{" "}
-                    <button onClick={() => this.props.deleteMemo(memo.id)}>delete</button>
+                    <div className="list-buttom">
+                        <button><i class="material-icons">color_lens</i></button>
+                        <button><i class="material-icons">label</i></button>
+                        <button onClick={() => this.props.deleteMemo(memo.id)}><i class="material-icons">delete</i></button>
+                    </div>
                 </li>
                 
             );
         }); 
            return(
-               <div className="list">
+               <div className="list-container">
                    <ul>{list}</ul>
                 </div>
            );

@@ -33,8 +33,8 @@ class App extends React.Component {
     return(
       <div>
         <div className="header">
-          <i class="material-icons">menu</i>
-          <img src={icon} className="icon"/>
+          <i className="material-icons">menu</i>
+          <img src={icon} className="icon" alt=""/>
           <h2>Keep</h2>
           
         </div>
