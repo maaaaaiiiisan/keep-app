@@ -22,6 +22,13 @@ class App extends React.Component {
     });
   };
 
+  updateMemo = content => {
+    this.setState({
+      memos: [...this.state.memos, { content:content }],
+      nextId: this.state.nextId
+    });
+  }
+
   deleteMemo = id => {
     const filteredArray = this.state.memos.filter(memo =>{
       return memo.id !== id;
@@ -39,7 +46,7 @@ class App extends React.Component {
           
         </div>
         <Form addMemo={this.addMemo} />
-        <List memos={this.state.memos} deleteMemo={this.deleteMemo} />
+        <List memos={this.state.memos} updateMemo={this.updateMemo} deleteMemo={this.deleteMemo} />
       </div>
     );
   }

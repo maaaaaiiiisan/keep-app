@@ -6,17 +6,20 @@ class Form extends React.Component {
         super(props);
         this.state = { content:"" };
     }
-
+    handleFormSubmit(e) {
+         e.preventDefault();
+    }
+        
     render(){
         return (
             <div className="form">      
-                <form onSubmit={this.handleSubmit}>
+                <form onSubmit={this.handleFormSubmit}>
                 <input className="input-box"  placeholder="メモを入力..."　value={this.state.content} onChange={this.handleChange} />
                 </form>
                 <div className="form-bottom">
                 <i className="material-icons">color_lens</i>
                 <i className="material-icons">label</i>
-                <input className="input-close" type="submit" value="作成" /> 
+                <button className="input-close" type="submit" onClick={this.handleSubmit}>作成</button> 
                 </div>
             </div>
         );

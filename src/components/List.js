@@ -8,6 +8,7 @@ class List extends React.Component {
                 <li className="list">
                     {memo.content}{" "}
                     <div className="list-buttom">
+                        <button onClick={() => this.props.updateMemo(memo.id)}><i class="material-icons">edit</i></button>
                         <button><i class="material-icons">color_lens</i></button>
                         <button><i class="material-icons">label</i></button>
                         <button onClick={() => this.props.deleteMemo(memo.id)}><i class="material-icons">delete</i></button>
