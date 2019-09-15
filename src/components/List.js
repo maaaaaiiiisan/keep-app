@@ -3,15 +3,15 @@ import './List.scss';
 
 class List extends React.Component {
     render(){
-        const list = this.props.memos.map(memo =>{
-            return(
-                <li className="list">
-                    {memo.content}{" "}
+            const list = this.props.tasks.map(task =>{
+                return(
+                <li className="list" key={task.id}>
+                    {task.content}{" "}
                     <div className="list-buttom">
-                        <button onClick={() => this.props.updateMemo(memo.id)}><i class="material-icons">edit</i></button>
-                        <button><i class="material-icons">color_lens</i></button>
-                        <button><i class="material-icons">label</i></button>
-                        <button onClick={() => this.props.deleteMemo(memo.id)}><i class="material-icons">delete</i></button>
+                        <button onClick={() => this.props.updateMemo(task.id)}><i className="material-icons">edit</i></button>
+                        <button><i className="material-icons">color_lens</i></button>
+                        <button><i className="material-icons">label</i></button>
+                        <button onClick={() => this.props.deleteMemo(task.id)}><i className="material-icons">delete</i></button>
                     </div>
                 </li>
                 
@@ -22,7 +22,7 @@ class List extends React.Component {
                    <ul>{list}</ul>
                 </div>
            );
-        }
+}
 }
 
 export default List;

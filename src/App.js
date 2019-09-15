@@ -8,36 +8,83 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 class App extends React.Component {
   constructor(props){
     super(props);
-
+    // this.handleChange = this.handleChange.bind(this);
+    this.addMemo = this.addMemo.bind(this);
     this.state = {
-      memos: [],
+      // tasks: [],
+      tasks: [],
       nextId: 0
     };
   }
 
-  addMemo = content => {
+  // componentWillMount(){
+  //   this.fetchTasks()
+  // }
+  // fetchTasks(){
+  //   fetch("http://localhost:3001/tasks") // データを取得しに行く
+  //   .then( response => response.json() ) // json型のレスポンスをオブジェクトに変換する
+  //   .then( json => { // オブジェクトに変換したレスポンスを受け取り、
+  //     this.setState({ tasks: json }) // Stateを更新する
+  //   })
+  // }
+
+  addMemo(content){
     this.setState({
-      memos: [...this.state.memos, { id: this.state.nextId, content:content }],
+      tasks: [...this.state.tasks, { id: this.state.nextId, content:content }],
       nextId: this.state.nextId + 1
     });
   };
 
-  updateMemo = content => {
-    this.setState({
-      memos: [...this.state.memos, { content:content }],
-      nextId: this.state.nextId
-    });
-  }
+  updateMemo(taskId){
+      fetch("http://localhost:3001/tasks/"+taskId, {
+        method: "PUT",
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+      })
+      .then( this.fetchTasks )
+    }
 
-  deleteMemo = id => {
-    const filteredArray = this.state.memos.filter(memo =>{
-      return memo.id !== id;
-    });
-    this.setState({ memos: filteredArray });
-  };
+    deleteMemo(taskId) {
+      fetch("http://localhost:3001/tasks/"+taskId, {
+        method: "DELETE"
+      })
+      .then( this.fetchTasks )
+    }
+
+  // addMemo = content => {
+  //   this.setState({
+  //     memos: [...this.state.memos, { id: this.state.nextId, content:content }],
+  //     nextId: this.state.nextId + 1
+  //   });
+  // };
+
+  // updateMemo = content => {
+  //   this.setState({
+  //     memos: [...this.state.memos, { content:content }],
+  //     nextId: this.state.nextId
+  //   });
+  // }
+
+  // deleteMemo = id => {
+  //   const filteredArray = this.state.memos.filter(memo =>{
+  //     return memo.id !== id;
+  //   });
+  //   this.setState({ memos: filteredArray });
+  // };
 
   render(){
     return(
+    //   <div className="App">
+    //   <div className="tasks">
+    //   {
+    //     this.state.tasks.map( task => {
+    //         return <div className="task" key={ task.id }>{ task.body }</div>
+    //     })
+    //   }
+    //   </div>
+    // </div>
       <div>
         <div className="header">
           <i className="material-icons">menu</i>
@@ -45,8 +92,8 @@ class App extends React.Component {
           <h2>Keep</h2>
           
         </div>
-        <Form addMemo={this.addMemo} />
-        <List memos={this.state.memos} updateMemo={this.updateMemo} deleteMemo={this.deleteMemo} />
+        <Form addMemo={this.addMemo}  />
+        <List tasks={this.state.tasks} updateMemo={this.updateMemo} deleteMemo={this.deleteMemo} />
       </div>
     );
   }

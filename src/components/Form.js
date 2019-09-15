@@ -5,6 +5,7 @@ class Form extends React.Component {
     constructor(props){
         super(props);
         this.state = { content:"" };
+        this.handleChange = this.handleChange.bind(this);
     }
     handleFormSubmit(e) {
          e.preventDefault();
@@ -14,7 +15,7 @@ class Form extends React.Component {
         return (
             <div className="form">      
                 <form onSubmit={this.handleFormSubmit}>
-                <input className="input-box"  placeholder="メモを入力..."　value={this.state.content} onChange={this.handleChange} />
+                <input className="input-box"  placeholder="メモを入力..."　value={this.state.content} onChange={this.handleChange}  />
                 </form>
                 <div className="form-bottom">
                 <i className="material-icons">color_lens</i>
@@ -26,6 +27,8 @@ class Form extends React.Component {
     }
 
     handleChange = event => {
+        // const inputText = event.target.value
+        // this.setState({ inputText: inputText })
         const content = event.target.value;
         this.setState({ content: content });
     };
