@@ -58,3 +58,40 @@ i {
     transform: rotate(360deg);
   }
 }
+
+// form
+
+.form {
+  justify-content: center;
+  align-items: center;
+  margin: 40px 130px 16px 130px;
+  box-shadow: 0 1px 2px 0 rgba(60,64,67,0.302), 0 2px 6px 2px rgba(60,64,67,0.149);
+  border-radius: 12px;
+  
+  .form-top {
+      margin: 1rem;
+  }
+
+  .form-bottom {
+      margin: 1rem;
+  }
+
+  .input-box {
+      padding: 4px 16px 12px;
+      font-size: 0.875rem;
+      height: 5rem;
+      border: none;
+      display: flex;
+      width: 100%;
+  }
+  
+  .input-close {
+      float: right;
+      border: none;
+      padding: 8px 24px;
+      font-size: 14px;
+  }
+}
+input:focus {
+  outline: none;
+  }
