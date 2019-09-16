@@ -1,16 +1,3 @@
 {
-  "tasks": [
-    {
-      "id": 1,
-      "content": "あかさたな"
-    },
-    {
-      "id": 2,
-      "content": "あいうえお"
-    },
-    {
-      "content": "aaaa",
-      "id": 3
-    }
-  ]
+  "tasks": []
 }

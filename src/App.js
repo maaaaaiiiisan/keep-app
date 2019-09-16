@@ -1,6 +1,6 @@
 import React from 'react';
 // import Form from "./components/Form";
-import List from "./components/List";
+// import List from "./components/List";
 import './App.scss';
 import icon from './icon.png';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -8,10 +8,10 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 class App extends React.Component {
   constructor() {
     super();
-    // this.handleChange = this.handleChange.bind(this);
     this.fetchTasks = this.fetchTasks.bind(this);
     this.changeText = this.changeText.bind(this);
     this.addMemo = this.addMemo.bind(this);
+    this.deleteMemo = this.deleteMemo.bind(this);
     this.state = {
       tasks: []
     };
@@ -30,11 +30,13 @@ class App extends React.Component {
   }
 
   changeText = (event) => {
+    console.log("changeText");
     const inputText = event.target.value
     this.setState({ inputText: inputText })
   }
 
   addMemo = () => {
+    console.log("addMemo");
     fetch("http://localhost:3001/tasks", {
       method: "POST",
       headers: {
@@ -45,7 +47,9 @@ class App extends React.Component {
     })
       .then(this.fetchTasks)
   }
+
   deleteMemo(taskId) {
+    console.log("delete");
     fetch("http://localhost:3001/tasks/" + taskId, {
       method: "DELETE"
     })
@@ -53,6 +57,19 @@ class App extends React.Component {
   }
 
   render() {
+    const list = this.state.tasks.map(task => {
+      return (
+        <li className="list" key={task.id}>
+          {task.content}{" "}
+          <div className="list-buttom">
+            <button><i className="material-icons">edit</i></button>
+            <button><i className="material-icons">color_lens</i></button>
+            <button><i className="material-icons">label</i></button>
+            <button onClick={() => {this.deleteMemo(task.id)}}><i className="material-icons">delete</i></button>
+          </div>
+        </li>
+      );
+    });
     return (
       <div>
         <div className="header">
@@ -62,7 +79,7 @@ class App extends React.Component {
         </div>
         <div className="form">
           <div className="form-top">
-            <input className="input-box" placeholder="メモを入力..." 　onChange={this.changeText} />
+            <input className="input-box" placeholder="メモを入力..." onChange={this.changeText} />
           </div>
           <div className="form-bottom">
             <i className="material-icons">color_lens</i>
@@ -70,9 +87,11 @@ class App extends React.Component {
             <button className="input-close" type="submit" onClick={this.addMemo}>作成</button>
           </div>
         </div>
-        }
+        <div className="list-container">
+          <ul>{list}</ul>
+        </div>
         {/* <Form value={this.state.inputText} onClick={this.addMemo} onChange={this.changeText} /> */}
-        <List tasks={this.state.tasks} onClick={this.updateMemo} deleteMemo={this.deleteMemo} />
+        {/* <List tasks={this.state.tasks} onClick={this.deleteMemo} /> */}
       </div>
     );
   }
