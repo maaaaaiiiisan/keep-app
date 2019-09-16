@@ -6,46 +6,49 @@ import icon from './icon.png';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 class App extends React.Component {
-  constructor(props){
-    super(props);
+  constructor(){
+    super();
     // this.handleChange = this.handleChange.bind(this);
+    // this.fetchTasks = this.fetchTasks.bind(this);
+    this.changeText = this.changeText.bind(this);
     this.addMemo = this.addMemo.bind(this);
     this.state = {
-      // tasks: [],
-      tasks: [],
-      nextId: 0
+      tasks: []
     };
   }
 
-  // componentWillMount(){
-  //   this.fetchTasks()
-  // }
-  // fetchTasks(){
-  //   fetch("http://localhost:3001/tasks") // データを取得しに行く
-  //   .then( response => response.json() ) // json型のレスポンスをオブジェクトに変換する
-  //   .then( json => { // オブジェクトに変換したレスポンスを受け取り、
-  //     this.setState({ tasks: json }) // Stateを更新する
-  //   })
-  // }
-
-  addMemo(content){
-    this.setState({
-      tasks: [...this.state.tasks, { id: this.state.nextId, content:content }],
-      nextId: this.state.nextId + 1
+  async componentDidMount(){
+    await fetch("http://localhost:3001/tasks") // データを取得しに行く
+    .then((response) => response.json()) // json型のレスポンスをオブジェクトに変換する
+    .then((json) => { // オブジェクトに変換したレスポンスを受け取り、
+      this.setState({ 
+        tasks: json
+     }); // Stateを更新する
+    })
+    .catch((error) =>{
+      console.error(error);
     });
-  };
+  }
 
-  updateMemo(taskId){
-      fetch("http://localhost:3001/tasks/"+taskId, {
-        method: "PUT",
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
-        },
-      })
-      .then( this.fetchTasks )
-    }
+  changeText = (event)=> {
+    console.log("bbb");
+    const inputText = event.target.value
+    this.setState({ inputText: inputText })
+    console.dir(inputText);
+  }
 
+  addMemo = () => {
+    console.log("aaa");
+   fetch("http://localhost:3001/tasks", {
+      method: "POST",
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ content: this.state.inputText })
+    })
+    .then( this.fetchTasks )
+  }
     deleteMemo(taskId) {
       fetch("http://localhost:3001/tasks/"+taskId, {
         method: "DELETE"
@@ -53,38 +56,8 @@ class App extends React.Component {
       .then( this.fetchTasks )
     }
 
-  // addMemo = content => {
-  //   this.setState({
-  //     memos: [...this.state.memos, { id: this.state.nextId, content:content }],
-  //     nextId: this.state.nextId + 1
-  //   });
-  // };
-
-  // updateMemo = content => {
-  //   this.setState({
-  //     memos: [...this.state.memos, { content:content }],
-  //     nextId: this.state.nextId
-  //   });
-  // }
-
-  // deleteMemo = id => {
-  //   const filteredArray = this.state.memos.filter(memo =>{
-  //     return memo.id !== id;
-  //   });
-  //   this.setState({ memos: filteredArray });
-  // };
-
   render(){
     return(
-    //   <div className="App">
-    //   <div className="tasks">
-    //   {
-    //     this.state.tasks.map( task => {
-    //         return <div className="task" key={ task.id }>{ task.body }</div>
-    //     })
-    //   }
-    //   </div>
-    // </div>
       <div>
         <div className="header">
           <i className="material-icons">menu</i>
@@ -92,11 +65,12 @@ class App extends React.Component {
           <h2>Keep</h2>
           
         </div>
-        <Form addMemo={this.addMemo}  />
-        <List tasks={this.state.tasks} updateMemo={this.updateMemo} deleteMemo={this.deleteMemo} />
+        <Form value={this.state.inputText} onClick={this.addMemo} onChange={this.changeText} />
+        <List tasks={this.state.tasks} onClick={this.updateMemo} deleteMemo={this.deleteMemo} />
       </div>
     );
   }
 }
+
 
 export default App;
