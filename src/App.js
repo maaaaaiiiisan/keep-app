@@ -4,6 +4,8 @@ import React from 'react';
 import './App.scss';
 import icon from './icon.png';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import ReactDOM from 'react-dom'
+
 
 class App extends React.Component {
   constructor() {
@@ -12,6 +14,8 @@ class App extends React.Component {
     this.changeText = this.changeText.bind(this);
     this.addMemo = this.addMemo.bind(this);
     this.deleteMemo = this.deleteMemo.bind(this);
+    this.editMemo = this.editMemo.bind(this);
+    this.state = {showInput: false};
     this.state = {
       tasks: []
     };
@@ -32,10 +36,12 @@ class App extends React.Component {
   changeText = (event) => {
     console.log("changeText");
     const inputText = event.target.value
-    this.setState({ inputText: inputText })
+    this.setState({ inputText: inputText });
+    console.dir(inputText);
   }
 
   addMemo = () => {
+    this.setState({showInput: false});
     console.log("addMemo");
     fetch("http://localhost:3001/tasks", {
       method: "POST",
@@ -49,6 +55,7 @@ class App extends React.Component {
   }
 
   deleteMemo(taskId) {
+    this.setState({showInput: false});
     console.log("delete");
     fetch("http://localhost:3001/tasks/" + taskId, {
       method: "DELETE"
@@ -56,13 +63,28 @@ class App extends React.Component {
       .then(this.fetchTasks)
   }
 
+  editMemo(taskId) {
+    this.setState({showInput: true});
+    let input = ReactDOM.findDOMNode(this.refs['text-cell']);
+    input && input.focus();
+  }
+
   render() {
     const list = this.state.tasks.map(task => {
+      const showInput = this.state.showInput;
+      let input;
+      if (showInput) {
+        input = <input className="input-box" onChange={this.changeText} key={ task.id } ref="text-cell"/>;
+      } else {
+        input = <input className="input-box" onChange={this.changeText} key={ task.id } value={task.content}/>;
+      }
+
       return (
         <li className="list" key={task.id}>
-          {task.content}{" "}
+          {input}
+          {/* <input className="input-box" onChange={this.changeText} key={ task.id } value={task.content} ref="text-cell"/> */}
           <div className="list-buttom">
-            <button><i className="material-icons">edit</i></button>
+            <button onClick={() => {this.editMemo(task.id)}}><i className="material-icons">edit</i></button>
             <button><i className="material-icons">color_lens</i></button>
             <button><i className="material-icons">label</i></button>
             <button onClick={() => {this.deleteMemo(task.id)}}><i className="material-icons">delete</i></button>
@@ -96,6 +118,5 @@ class App extends React.Component {
     );
   }
 }
-
 
 export default App;
