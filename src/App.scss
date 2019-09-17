@@ -59,6 +59,9 @@ i {
   }
 }
 
+  .purple { color: #d7aefb; }
+  .pink { color: #f28b82; }
+
 // form
 
 .form {
@@ -132,6 +135,7 @@ button{
     border-radius: 12px;
     border-width: 1px;
     margin: 16px 16px 16px 0px;
+    width: 100%;
 }
 .list-bottom {
     display: block;
