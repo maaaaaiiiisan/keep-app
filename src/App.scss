@@ -109,8 +109,8 @@ input:focus {
 
 ul {
     list-style: none;
-    width: 70%;
     padding-left: 0;
+    text-align: center;
 }
 
 .list-container {
@@ -135,7 +135,8 @@ button{
     border-radius: 12px;
     border-width: 1px;
     margin: 16px 16px 16px 0px;
-    width: 100%;
+    width: 240px;
+    display: inline-block;
 }
 .list-bottom {
     display: block;

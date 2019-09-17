@@ -1,10 +1,10 @@
 import React from 'react';
 // import Form from "./components/Form";
 // import List from "./components/List";
+import Card from './components/Card'
 import './App.scss';
 import icon from './icon.png';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import ReactDOM from 'react-dom'
 
 
 class App extends React.Component {
@@ -14,11 +14,10 @@ class App extends React.Component {
     this.changeText = this.changeText.bind(this);
     this.addMemo = this.addMemo.bind(this);
     this.deleteMemo = this.deleteMemo.bind(this);
-    this.editMemo = this.editMemo.bind(this);
-    this.state = { showInput: false };
-    this.state = { black: true };
-    this.state = { color: null }; 
-    this.state = {
+    this.state = { 
+      showInput: false,
+      black: true,
+      color: null,
       tasks: []
     };
   }
@@ -65,31 +64,6 @@ class App extends React.Component {
       .then(this.fetchTasks)
   }
 
-  editMemo(taskId) {
-    this.setState({ showInput: true });
-    let input = ReactDOM.findDOMNode(this.refs['text-cell']);
-    input && input.focus();
-  }
-
-  doneMemo(taskId) {
-    console.log("done");
-    fetch("http://localhost:3001/tasks", {
-      method: "POST",
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ content: this.state.inputText })
-    })
-  }
-
-  changeColor = () => {
-  //   switch(this.state.color){
-  //   case "purple":  this.setState({bgColor: '#d7aefb'});
-  // }
-  this.setState({bgColor: '#d7aefb'});
-}
-
   render() {
     const list = this.state.tasks.map(task => {
       const showInput = this.state.showInput;
@@ -101,20 +75,10 @@ class App extends React.Component {
       }
       
       return (
-        <li className="list" key={task.id} style={{backgroundColor:this.state.bgColor}}>
-          {input}
-          {/* <input className="input-box" onChange={this.changeText} key={ task.id } value={task.content} ref="text-cell"/> */}
-          <div className="list-buttom">
-            <button onClick={() => { this.editMemo(task.id) }}><i className="material-icons">edit</i></button>
-            <button onClick={() => { this.doneMemo(task.id)}}><i className="material-icons">done</i></button>
-            <button><i className="material-icons">color_lens</i></button>
-            <button><i className="material-icons pink">color_lens</i></button>
-            <button onClick={ this.changeColor.bind(this) }><i className="material-icons purple">color_lens</i></button>
-            {/* <button onClick={ this.changeColor.bind(this) } color="purple"><i className="material-icons purple">color_lens</i></button> */}
-            <button><i className="material-icons">label</i></button>
-            <button onClick={() => { this.deleteMemo(task.id) }}><i className="material-icons">delete</i></button>
-          </div>
-        </li>
+        <Card
+          key={task.id}
+          task={task}
+        />
       );
     });
     return (
