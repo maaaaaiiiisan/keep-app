@@ -1,12 +1,14 @@
 {
   "tasks": [
     {
-      "content": "aaaaaa",
-      "id": 2
+      "content": "aaaaa",
+      "color": "#f28b82",
+      "id": 1
     },
     {
       "content": "あいうえお",
-      "id": 3
+      "color": "#f28b82",
+      "id": 2
     }
   ]
 }

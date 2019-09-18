@@ -3,9 +3,13 @@ import './Card.scss';
 
 class Card extends React.Component {
     state = {
-        bgColor: '',
+        // color: '',
         isEditMode: false,
-        content: this.props.task.content
+        content: this.props.task.content,
+        color: this.props.task.color,
+        // color: this.props.task.color,
+        tasks: this.props.tasks,
+        task: this.props.task
     }
 
     toggleEditMode = () => {
@@ -28,13 +32,16 @@ class Card extends React.Component {
 
     changeColor = (color = "#ffffff") => {
         this.setState({
-            bgColor: color
-        })
+            color : color
+        });
+        this.props.saveMemo(this.props.task.id,this.state.content, this.state.color);
+        console.log(this.state.color);
+        console.log(this.state.tasks);
     }
 
     render() {
         return (
-            <li className="list" key={this.props.task.id} style={{ backgroundColor: this.state.bgColor }}>
+            <li className="list" key={this.props.task.id} style={{ backgroundColor: this.state.color }}>
                 {this.state.isEditMode ?
                     <input
                         className="input-box"

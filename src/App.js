@@ -1,6 +1,5 @@
 import React from 'react';
 import Form from "./components/Form/Form";
-// import List from "./components/List";
 import './App.scss';
 import Card from "./components/Card/Card";
 import icon from './icon.png';
@@ -52,10 +51,9 @@ class App extends React.Component {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({ content: this.state.inputText })
+      body: JSON.stringify({ content: this.state.inputText, color: this.state.color})
     })
       .then(this.fetchTasks)
-      console.log("addMemo2");
   }
 
   deleteMemo(taskId) {
@@ -73,24 +71,16 @@ class App extends React.Component {
     input && input.focus();
   }
 
-  doneMemo = () => {
-    console.log("done");
-    fetch("http://localhost:3001/tasks", {
-      method: "POST",
+  saveMemo = (taskId, content, color) => {
+    fetch("http://localhost:3001/tasks/" + taskId, {
+      method: "PUT",
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({ content: this.state.inputText })
+      body: JSON.stringify({ content, color})
     })
   }
-
-  changeColor = () => {
-  //   switch(this.state.color){
-  //   case "purple":  this.setState({bgColor: '#d7aefb'});
-  // }
-  this.setState({bgColor: '#d7aefb'});
-}
 
   render() {
     const list = this.state.tasks.map(task => {
@@ -103,8 +93,17 @@ class App extends React.Component {
       }
       
       return (
-        // <Card deleteMemo={this.deleteMemo} task={task} key={task.id} editMemo={this.editMemo} doneMemo={this.doneMemo}/>
-        <Card task={task} key={task.id} changeText={this.changeText} doneMemo={this.doneMemo} deleteMemo={this.deleteMemo} />
+        <Card 
+          task={task}
+          color={this.state.color}
+          tasks={this.state.tasks}
+          key={task.id}
+          changeColor={this.changeColor}
+          changeText={this.changeText}
+          deleteMemo={this.deleteMemo}
+          fetchTasks={this.fetchTasks}
+          saveMemo={this.saveMemo}
+        />
       );
     });
     return (
@@ -116,11 +115,8 @@ class App extends React.Component {
         </div>
         <Form changeText={ this.changeText } addMemo= {this.addMemo } />
         <div className="list-container">
-          {/* <Card /> */}
           <ul>{list}</ul>
         </div>
-        {/* <Form value={this.state.inputText} onClick={this.addMemo} onChange={this.changeText} /> */}
-        {/* <List tasks={this.state.tasks} onClick={this.deleteMemo} /> */}
       </div>
     );
   }
