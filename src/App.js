@@ -1,9 +1,10 @@
 import React from 'react';
-// import Form from "./components/Form";
+import Form from "./components/Form/Form";
 // import List from "./components/List";
 import './App.scss';
+import Card from "./components/Card/Card";
 import icon from './icon.png';
-import 'bootstrap/dist/css/bootstrap.min.css';
+// import 'bootstrap/dist/css/bootstrap.min.css';
 import ReactDOM from 'react-dom'
 
 
@@ -15,10 +16,10 @@ class App extends React.Component {
     this.addMemo = this.addMemo.bind(this);
     this.deleteMemo = this.deleteMemo.bind(this);
     this.editMemo = this.editMemo.bind(this);
-    this.state = { showInput: false };
-    this.state = { black: true };
-    this.state = { color: null }; 
-    this.state = {
+    this.state = { 
+      showInput: false,
+      black: true,
+      color: null,
       tasks: []
     };
   }
@@ -54,6 +55,7 @@ class App extends React.Component {
       body: JSON.stringify({ content: this.state.inputText })
     })
       .then(this.fetchTasks)
+      console.log("addMemo2");
   }
 
   deleteMemo(taskId) {
@@ -71,7 +73,7 @@ class App extends React.Component {
     input && input.focus();
   }
 
-  doneMemo(taskId) {
+  doneMemo = () => {
     console.log("done");
     fetch("http://localhost:3001/tasks", {
       method: "POST",
@@ -101,20 +103,8 @@ class App extends React.Component {
       }
       
       return (
-        <li className="list" key={task.id} style={{backgroundColor:this.state.bgColor}}>
-          {input}
-          {/* <input className="input-box" onChange={this.changeText} key={ task.id } value={task.content} ref="text-cell"/> */}
-          <div className="list-buttom">
-            <button onClick={() => { this.editMemo(task.id) }}><i className="material-icons">edit</i></button>
-            <button onClick={() => { this.doneMemo(task.id)}}><i className="material-icons">done</i></button>
-            <button><i className="material-icons">color_lens</i></button>
-            <button><i className="material-icons pink">color_lens</i></button>
-            <button onClick={ this.changeColor.bind(this) }><i className="material-icons purple">color_lens</i></button>
-            {/* <button onClick={ this.changeColor.bind(this) } color="purple"><i className="material-icons purple">color_lens</i></button> */}
-            <button><i className="material-icons">label</i></button>
-            <button onClick={() => { this.deleteMemo(task.id) }}><i className="material-icons">delete</i></button>
-          </div>
-        </li>
+        // <Card deleteMemo={this.deleteMemo} task={task} key={task.id} editMemo={this.editMemo} doneMemo={this.doneMemo}/>
+        <Card task={task} key={task.id} changeText={this.changeText} doneMemo={this.doneMemo} deleteMemo={this.deleteMemo} />
       );
     });
     return (
@@ -124,19 +114,9 @@ class App extends React.Component {
           <img src={icon} className="icon" alt="" />
           <h2>Keep</h2>
         </div>
-        <div className="form">
-          <div className="form-top">
-            <input className="input-box" placeholder="メモを入力..." onChange={this.changeText} />
-          </div>
-          <div className="form-bottom">
-            <button><i className="material-icons">color_lens</i></button>
-            <button><i className="material-icons pink">color_lens</i></button>
-            <button><i className="material-icons purple">color_lens</i></button>
-            <button> <i className="material-icons">label</i></button>
-            <button className="input-close" type="submit" onClick={this.addMemo}>作成</button>
-          </div>
-        </div>
+        <Form changeText={ this.changeText } addMemo= {this.addMemo } />
         <div className="list-container">
+          {/* <Card /> */}
           <ul>{list}</ul>
         </div>
         {/* <Form value={this.state.inputText} onClick={this.addMemo} onChange={this.changeText} /> */}
