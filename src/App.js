@@ -42,6 +42,13 @@ class App extends React.Component {
     console.dir(inputText);
   }
 
+  changeFormColor = (color = "#ffffff") => {
+    this.setState({
+        color : color
+    });
+    console.log(this.state.color);
+}
+
   addMemo = () => {
     this.setState({ showInput: false });
     console.log("addMemo");
@@ -51,7 +58,22 @@ class App extends React.Component {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
       },
+      // body: JSON.stringify({ content: this.state.inputText, color: this.state.color})
       body: JSON.stringify({ content: this.state.inputText, color: this.state.color})
+    })
+      .then(this.fetchTasks)
+  }
+
+  addMemo2 = (content, color) => {
+    console.log("addMemo");
+    fetch("http://localhost:3001/tasks", {
+      method: "POST",
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      // body: JSON.stringify({ content: this.state.inputText, color: this.state.color})
+      body: JSON.stringify({ content, color})
     })
       .then(this.fetchTasks)
   }
@@ -98,7 +120,6 @@ class App extends React.Component {
           color={this.state.color}
           tasks={this.state.tasks}
           key={task.id}
-          changeColor={this.changeColor}
           changeText={this.changeText}
           deleteMemo={this.deleteMemo}
           fetchTasks={this.fetchTasks}
@@ -113,7 +134,14 @@ class App extends React.Component {
           <img src={icon} className="icon" alt="" />
           <h2>Keep</h2>
         </div>
-        <Form changeText={ this.changeText } addMemo= {this.addMemo } />
+        <Form 
+          changeFormColor={this.changeFormColor}
+          color={this.state.color}
+          tasks={this.state.tasks}
+          saveMemo={this.saveMemo}
+          changeText={ this.changeText }
+          addMemo= {this.addMemo }
+        />
         <div className="list-container">
           <ul>{list}</ul>
         </div>
