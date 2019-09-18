@@ -3,7 +3,6 @@ import Form from "./components/Form/Form";
 import './App.scss';
 import Card from "./components/Card/Card";
 import icon from './icon.png';
-// import 'bootstrap/dist/css/bootstrap.min.css';
 import ReactDOM from 'react-dom'
 
 
@@ -58,25 +57,11 @@ class App extends React.Component {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
       },
-      // body: JSON.stringify({ content: this.state.inputText, color: this.state.color})
       body: JSON.stringify({ content: this.state.inputText, color: this.state.color})
     })
       .then(this.fetchTasks)
   }
 
-  addMemo2 = (content, color) => {
-    console.log("addMemo");
-    fetch("http://localhost:3001/tasks", {
-      method: "POST",
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      // body: JSON.stringify({ content: this.state.inputText, color: this.state.color})
-      body: JSON.stringify({ content, color})
-    })
-      .then(this.fetchTasks)
-  }
 
   deleteMemo(taskId) {
     this.setState({ showInput: false });

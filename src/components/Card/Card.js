@@ -61,7 +61,6 @@ class Card extends React.Component {
                     <button onClick={() => this.changeColor()} ><i className="material-icons">color_lens</i></button>
                     <button onClick={() => this.changeColor('#f28b82')}><i className="material-icons pink">color_lens</i></button>
                     <button onClick={() => this.changeColor('#d7aefb')}><i className="material-icons purple">color_lens</i></button>
-                    <button><i className="material-icons">label</i></button>
                     <button onClick={() => this.props.deleteMemo(this.props.task.id)}><i className="material-icons">delete</i></button>
                 </div>
             </li>
