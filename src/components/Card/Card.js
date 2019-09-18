@@ -3,11 +3,9 @@ import './Card.scss';
 
 class Card extends React.Component {
     state = {
-        // color: '',
         isEditMode: false,
         content: this.props.task.content,
         color: this.props.task.color,
-        // color: this.props.task.color,
         tasks: this.props.tasks,
         task: this.props.task
     }
@@ -20,8 +18,9 @@ class Card extends React.Component {
 
     handleEditDone = () => {
         this.setState({
-            isEditMode: false
+            isEditMode: false,
         })
+        this.props.saveMemo(this.props.task.id,this.state.content, this.state.color);
     }
 
     changeText = (e) => {
