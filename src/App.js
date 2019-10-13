@@ -27,7 +27,7 @@ class App extends React.Component {
   }
 
   async fetchTasks() {
-    await fetch("http://localhost:3001/tasks")
+    await fetch("http://localhost:3000/tasks")
       .then((response) => response.json())
       .then((json) => {
         this.setState({ tasks: json })
@@ -51,7 +51,7 @@ class App extends React.Component {
   addMemo = () => {
     this.setState({ showInput: false });
     console.log("addMemo");
-    fetch("http://localhost:3001/tasks", {
+    fetch("http://localhost:3000/tasks", {
       method: "POST",
       headers: {
         'Accept': 'application/json',
@@ -66,7 +66,7 @@ class App extends React.Component {
   deleteMemo(taskId) {
     this.setState({ showInput: false });
     console.log("delete");
-    fetch("http://localhost:3001/tasks/" + taskId, {
+    fetch("http://localhost:3000/tasks/" + taskId, {
       method: "DELETE"
     })
       .then(this.fetchTasks)
