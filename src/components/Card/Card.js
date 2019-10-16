@@ -20,7 +20,7 @@ class Card extends React.Component {
         this.setState({
             isEditMode: false,
         })
-        this.props.saveMemo(this.props.task.id,this.state.content, this.state.color);
+        this.props.saveMemo(this.props.task.id, this.state.content, this.state.color);
     }
 
     changeText = (e) => {
@@ -31,9 +31,9 @@ class Card extends React.Component {
 
     changeColor = (color = "#ffffff") => {
         this.setState({
-            color : color
+            color: color
         });
-        this.props.saveMemo(this.props.task.id,this.state.content, this.state.color);
+        this.props.saveMemo(this.props.task.id, this.state.content, this.state.color);
         console.log(this.state.color);
         console.log(this.state.tasks);
     }
